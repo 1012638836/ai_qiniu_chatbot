@@ -12,7 +12,7 @@
       <paths name="root@connect.cqa1.seetacloud.com:23265 (2)">
         <serverdata>
           <mappings>
-            <mapping deploy="/root/autodl-tmp/ai_qiniu_chatbot" local="$PROJECT_DIR$" />
+            <mapping deploy="/" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

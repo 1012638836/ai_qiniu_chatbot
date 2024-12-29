@@ -1,1 +1,11 @@
-This is a project on autogen-chat 0.4 and langchain
+conda activate faiss
+nohup python app.py >> /www/logs/faiss_server/main_logger.log 2>&1 &
+
+conda activate faiss
+nohup python bge_reranker.py >> ./bge_reranker.log 2>&1 &
+curl --location --request POST 'http://127.0.0.1:5000/v1/rerank' --header 'Content-Type: application/json' --data '[["有回放吗?", "今天有回放吗？"], ["有回放吗？", "今天上课吗？"]]'
+
+conda activate faiss
+nohup python bge_embedding.py >> ./bge_embedding.log 2>&1 &
+curl --location --request POST 'http://127.0.0.1:50072/embedding' --header 'Content-Type: application/json' --data '{"text": "你好"}'
+

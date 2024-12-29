@@ -36,24 +36,22 @@ def q_retrieval_chain_with_rewrite():
     q_retrieval_chain = QRetrievalChainWithRewrite(faiss_vectorstore, bge_embedding, rewriter)
     kwargs = {
         'index_name': 'qiniu_20241228',
-        'query': '老师怎么上课呀',
+        'query': '老师有回放吗？',
         'top_k': 10,
         'filter': None
     }
     rerank_result = q_retrieval_chain.invoke(**kwargs)
     return rerank_result
 
-def rag_chain():
+def rag_chain(question):
     # 传入参数
     kwargs = {
-        'index_name': 'qiniu_live',
-        'query': '老师怎么上课呀',
+        'index_name': 'qiniu_20241228',
+        'query': question,
         'top_k': 10,
         'filter': None,
         'prompt_kwargs': {
-            'question': '老师怎么上课呀',  # query
-            'camp_date_start_time': '后天',
-            'current_day_str': '2月25日'
+            'question': question,  # query
         },
         'sensitive_words': ['骗钱']
     }
@@ -75,4 +73,4 @@ def rag_chain():
 
 
 if __name__ == '__main__':
-    rag_chain()
+    rag_chain(question = "老师有回放吗？")
