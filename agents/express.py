@@ -4,10 +4,11 @@
 # @Email : lijinze@lzzg365.cn
 # @File : express.py
 # @Project : ai_qiniu_chatbot
+
 from .base import BaseAgent
 from autogen_agentchat.agents import AssistantAgent
-from tools.express_tools import search_express_tool
-from tools.common_tools import get_current_time
+from agents.tools.express_tools import search_express_tool
+from agents.tools.common_tools import get_current_time
 
 class ExpressAgent(BaseAgent):
     def __init__(self, model_client):

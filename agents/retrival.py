@@ -6,8 +6,8 @@
 # @Project : ai_qiniu_chatbot
 from .base import BaseAgent
 from autogen_agentchat.agents import AssistantAgent
-from tools.common_tools import get_current_time
-from tools.rag_tools import rag_tool
+from agents.tools.common_tools import get_current_time
+from agents.tools.rag_tools import rag_tool
 
 class RAGAgent(BaseAgent):
     def __init__(self, model_client):

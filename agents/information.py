@@ -6,8 +6,8 @@
 # @Project : ai_qiniu_chatbot
 from .base import BaseAgent
 from autogen_agentchat.agents import AssistantAgent
-from tools.common_tools import get_current_time
-from tools.information_tools import get_lession_information
+from agents.tools.common_tools import get_current_time
+from agents.tools.information_tools import get_lession_information
 
 class InformationAgent(BaseAgent):
     def __init__(self, model_client):

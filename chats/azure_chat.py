@@ -7,6 +7,9 @@
 import json, requests
 from .base import BaseChat
 from openai import AzureOpenAI
+from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
+
+
 
 class AzureChatOpenAI(BaseChat):
     # todo:返回的数据类型
@@ -28,8 +31,18 @@ class AzureChatOpenAI(BaseChat):
 
         return response.choices[0].message.content
 
-
-
+class AzureAutogen(BaseChat):
+    @classmethod
+    def get_client_model(cls):
+        client_model = AzureOpenAIChatCompletionClient(
+            azure_deployment="test-az-eus-gpt-4o",
+            model="gpt-4o",
+            api_version="2023-05-15",
+            azure_endpoint="https://test-az-eus-ai-openai01.openai.azure.com/",
+            # azure_ad_token_provider=token_provider,  # Optional if you choose key-based authentication.
+            api_key="02855675d52d4abfa48868c00c6f2773", # For key-based authentication.
+        )
+        return client_model
 
 
 
