@@ -37,7 +37,7 @@ class QiniuChatbot():
         return chat_result_list.messages[-1].content
 
 qiniu_instance = QiniuChatbot()
-print(qiniu_instance.run("书是免费吗？"))
+print(qiniu_instance.run("有回放吗？"))
 
 
 

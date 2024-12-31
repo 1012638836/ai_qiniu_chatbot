@@ -17,7 +17,7 @@ class InformationAgent(BaseAgent):
     def _get_agent(self):
         course_information_agent = AssistantAgent(
             "StartInformationAgent",
-            description="An agent who knows when the course starts.but Course start time information only, no other course information",
+            description="你是一个人工智能小助手，专门回答课程相关信息，例如某节课的开课时间，结束时间，课程老师是谁？课程持续时间等等问题",
             tools=self.tools,
             handoffs=['SummaryAgent'],
             model_client=self.model_client,

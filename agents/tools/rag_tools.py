@@ -41,8 +41,8 @@ def rag_tool(query: Annotated[str, "the question"]) -> RAGType:
     }
 
     # 执行
-    chat = AzureChatOpenAI()
-    # chat = LocalChat()
+    # chat = AzureChatOpenAI()
+    chat = LocalChat()
     faiss_vectorstore = MyFaissVectorstore()
     bge_embedding = BGEEmbedding()
     generate_prompt = GeneratePrompt()
@@ -59,4 +59,4 @@ def rag_tool(query: Annotated[str, "the question"]) -> RAGType:
     return result + " TERMINATE"
 
 if __name__ == '__main__':
-    rag_tool("书是免费吗？")
+    rag_tool("课程是免费吗？")
