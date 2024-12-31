@@ -11,7 +11,8 @@ from agents.information import InformationAgent
 from agents.planning import PlanAgent
 from agents.summary import SummaryAgent
 from agents.retrival import RAGAgent
-from chats.azure_chat import AzureChatOpenAI, AzureAutogen
+from agents.order import OrderInformationAgent
+from chats.azure_chat import AzureChatOpenAI, AzureAutogen, LocalChat
 from autogen_agentchat.conditions import SourceMatchTermination, TextMentionTermination, MaxMessageTermination
 from autogen_agentchat.teams import Swarm
 from autogen_agentchat.ui import Console

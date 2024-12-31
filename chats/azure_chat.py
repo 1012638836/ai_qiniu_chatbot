@@ -8,7 +8,7 @@ import json, requests
 from .base import BaseChat
 from openai import AzureOpenAI
 from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
-
+from autogen_ext.models.openai import OpenAIChatCompletionClient
 
 
 class AzureChatOpenAI(BaseChat):
@@ -44,5 +44,18 @@ class AzureAutogen(BaseChat):
         )
         return client_model
 
-
+class LocalChat(BaseChat):
+    @classmethod
+    def get_client_model(cls):
+        client_model = OpenAIChatCompletionClient(
+            model = "qwen2-chat",
+            base_url = "http://127.0.0.1:8000/v1",
+            api_key = "NULL",
+            model_capabilities={
+                "vision": False,
+                "function_calling": True,
+                "json_output": True,
+            },
+        )
+        return client_model
 

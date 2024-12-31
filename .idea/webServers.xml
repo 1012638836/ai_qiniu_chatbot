@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="449f6cd8-3724-4dad-9921-d250168f948e" name="ai_qiniu_chatbot">
-        <fileTransfer rootFolder="/root/autodl-tmp/ai_qiniu_chatbot" accessType="SFTP" host="connect.cqa1.seetacloud.com" port="30424" sshConfigId="5574addf-68fc-4e3e-b765-92aa6d2d3a32" sshConfig="root@connect.cqa1.seetacloud.com:30424 password">
+        <fileTransfer rootFolder="/root/autodl-tmp/ai_qiniu_chatbot" accessType="SFTP" host="connect.cqa1.seetacloud.com" port="36904" sshConfigId="5574addf-68fc-4e3e-b765-92aa6d2d3a32" sshConfig="root@connect.cqa1.seetacloud.com:36904 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
