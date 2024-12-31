@@ -9,6 +9,7 @@ from .base import BaseChat
 from openai import AzureOpenAI
 from autogen_ext.models.openai import AzureOpenAIChatCompletionClient
 from autogen_ext.models.openai import OpenAIChatCompletionClient
+from autogen_core.models import SystemMessage, UserMessage
 
 
 class AzureChatOpenAI(BaseChat):
@@ -28,8 +29,8 @@ class AzureChatOpenAI(BaseChat):
                 {"role": "user", "content": prompt}
             ]
         )
-
-        return response.choices[0].message.content
+        llms_content = response.choices[0].message.content
+        return llms_content
 
 class AzureAutogen(BaseChat):
     @classmethod

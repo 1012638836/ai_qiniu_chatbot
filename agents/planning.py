@@ -16,15 +16,15 @@ class PlanAgent(BaseAgent):
             "PlanningAgent",
             description="An agent for planning tasks, this agent should be the first to engage when given a new task.",
             model_client=self.model_client,
-            handoffs=['CourseInformationAgent', 'ExpressInformationAgent', 'OtherQuestinoAgent'],
+            handoffs=['StartInformationAgent', 'ExpressInformationAgent', 'OtherQuestinoAgent'],
             system_message="""
             You are a planning agent.
             Your team members are:
-                CourseInformationAgent: Query questions related to course start information
+                StartInformationAgent: 只负责回答课程开始时间相关信息，其他课程相关信息不负责回答
                 ExpressInformationAgent: Query express related questions
-                OtherQuestinoAgent：A backstop agent that solves problems unrelated to other agents
+                OtherQuestinoAgent：What StartInformationAgent and ExpressInformationAgent can't solve needs to be solved
             You only plan and delegate tasks - you do not execute them yourself.
-
+    
             When assigning tasks, use this format:
             1. <agent> : <task>
             """,

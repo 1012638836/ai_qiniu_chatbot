@@ -7,17 +7,17 @@
 from .base import BaseAgent
 from autogen_agentchat.agents import AssistantAgent
 from agents.tools.common_tools import get_current_time
-from agents.tools.information_tools import get_lession_information
+from agents.tools.information_tools import get_lession_start_time
 
 class InformationAgent(BaseAgent):
     def __init__(self, model_client):
         super().__init__(model_client)
-        self.tools = [get_lession_information, get_current_time]
+        self.tools = [get_lession_start_time, get_current_time]
 
     def _get_agent(self):
         course_information_agent = AssistantAgent(
-            "CourseInformationAgent",
-            description="An agent who knows when the course starts.",
+            "StartInformationAgent",
+            description="An agent who knows when the course starts.but Course start time information only, no other course information",
             tools=self.tools,
             handoffs=['SummaryAgent'],
             model_client=self.model_client,

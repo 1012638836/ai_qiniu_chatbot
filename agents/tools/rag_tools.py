@@ -4,7 +4,7 @@
 # @Email : lijinze@lzzg365.cn
 # @File : rag_tools.py
 # @Project : ai_qiniu_chatbot
-from chats.azure_chat import AzureChatOpenAI
+from chats.azure_chat import AzureChatOpenAI, LocalChat
 from embeddings.embeddings import BGEEmbedding
 from vectorstores.vectorstores import MyFaissVectorstore
 from prompt_templates.geralprompt import GeneratePrompt
@@ -42,6 +42,7 @@ def rag_tool(query: Annotated[str, "the question"]) -> RAGType:
 
     # 执行
     chat = AzureChatOpenAI()
+    # chat = LocalChat()
     faiss_vectorstore = MyFaissVectorstore()
     bge_embedding = BGEEmbedding()
     generate_prompt = GeneratePrompt()
@@ -56,3 +57,6 @@ def rag_tool(query: Annotated[str, "the question"]) -> RAGType:
     print("result:", result)
 
     return result + " TERMINATE"
+
+if __name__ == '__main__':
+    rag_tool("书是免费吗？")
