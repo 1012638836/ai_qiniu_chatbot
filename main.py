@@ -29,8 +29,9 @@ class QiniuChatbot():
         express_information_agent = ExpressAgent(model_client).get_agent()
         other_rag_agent = RAGAgent(model_client).get_agent()
         summary_agent = SummaryAgent(model_client).get_agent()
+        order_agent = OrderInformationAgent(model_client).get_agent()
         self.team = Swarm(
-            [planning_agent, start_time_information_agent, express_information_agent, other_rag_agent, summary_agent],
+            [planning_agent, start_time_information_agent, express_information_agent, other_rag_agent, summary_agent, order_agent],
             termination_condition=termination)
     def run(self, question):
         chat_result_list = asyncio.run(Console(self.team.run_stream(task=question)))
@@ -38,7 +39,7 @@ class QiniuChatbot():
 
 qiniu_instance = QiniuChatbot()
 print(qiniu_instance.run("有回放吗？"))
-
+# print(qiniu_instance.run("请问明天讲真上课吗？"))
 
 
 
