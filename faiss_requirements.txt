@@ -1,0 +1,5 @@
+faiss-cpu
+Flask
+transformers==4.46.3
+triton==3.0.0
+torch==2.4.1
