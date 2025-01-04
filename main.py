@@ -5,7 +5,7 @@
 # @File : main.py
 # @Project : ai_qiniu_chatbot
 
-import asyncio
+import asyncio, configparser
 from agents.express import ExpressAgent
 from agents.information import InformationAgent
 from agents.planning import PlanAgent
@@ -22,8 +22,13 @@ max_messages_termination = MaxMessageTermination(max_messages=15)
 termination = text_mention_termination | max_messages_termination
 
 class QiniuChatbot():
-    def __init__(self):
-        model_client = AzureAutogen().get_client_model()
+    def __init__(self, config):
+        model_conf = config.get('dev', 'model_conf')
+        model_name = config.get('dev', 'model_name')
+        if model_conf == 'local':
+            model_client = LocalChat(model_name = model_name).get_client_model()
+        else:
+            model_client = AzureAutogen().get_client_model()
         planning_agent = PlanAgent(model_client).get_agent()
         start_time_information_agent = InformationAgent(model_client).get_agent()
         express_information_agent = ExpressAgent(model_client).get_agent()
@@ -37,8 +42,10 @@ class QiniuChatbot():
         chat_result_list = asyncio.run(Console(self.team.run_stream(task=question)))
         return chat_result_list.messages[-1].content
 
-qiniu_instance = QiniuChatbot()
-print(qiniu_instance.run("有回放吗？"))
+config = configparser.ConfigParser()
+config.read('/root/autodl-tmp/general_conf.conf')
+qiniu_instance = QiniuChatbot(config)
+print(qiniu_instance.run("请问有回放吗？"))
 # print(qiniu_instance.run("请问明天讲真上课吗？"))
 
 

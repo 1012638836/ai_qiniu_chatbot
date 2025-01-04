@@ -46,9 +46,9 @@ class AzureAutogen(BaseChat):
         return client_model
 
 class LocalChat(BaseChat):
-    def __init__(self):
+    def __init__(self, model_name = "qwen2.5:7b"):
         self.client_model = OpenAIChatCompletionClient(
-            model="qwen2.5:7b",
+            model=model_name,
             api_key="NotRequiredSinceWeAreLocal",
             base_url="http://0.0.0.0:4000",
             model_capabilities={
@@ -58,9 +58,8 @@ class LocalChat(BaseChat):
             },
         )
 
-    @classmethod
-    def get_client_model(cls):
-        return cls.client_model
+    def get_client_model(self):
+        return self.client_model
 
     def _chat(self, prompt):
         async def chat_main():

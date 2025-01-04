@@ -8,6 +8,9 @@ import requests
 
 
 class BaseReranker:
+    def __init__(self, url = "http://127.0.0.1:5000/v1/rerank"):
+        self.url = url
+
     def rerank(self,  query: str, docs: list[str], doc_details: list[dict], top_k: int = 10) -> tuple[
         list[str], list[float]]:
         if len(docs)==0:

@@ -4,6 +4,7 @@
 # @Email : lijinze@lzzg365.cn
 # @File : rag_tools.py
 # @Project : ai_qiniu_chatbot
+import configparser
 from chats.azure_chat import AzureChatOpenAI, LocalChat
 from embeddings.embeddings import BGEEmbedding
 from vectorstores.vectorstores import MyFaissVectorstore
@@ -39,16 +40,23 @@ def rag_tool(query: Annotated[str, "the question"]) -> RAGType:
         },
         'sensitive_words': ['骗钱']
     }
-
-    # 执行
-    # chat = AzureChatOpenAI()
-    chat = LocalChat()
-    faiss_vectorstore = MyFaissVectorstore()
-    bge_embedding = BGEEmbedding()
+    config = configparser.ConfigParser()
+    config.read('/root/autodl-tmp/general_conf.conf')
+    model_name = config.get('dev', 'model_name')
+    faiss_server_url = config.get('dev', 'faiss_server_url')
+    rerank_server_url = config.get('dev', 'rerank_server_url')
+    embedding_server_url = config.get('dev', 'embedding_server_url')
+    model_conf = config.get('dev', 'model_conf')
+    if model_conf == 'local':
+        chat = LocalChat(model_name=model_name)
+    else:
+        chat = AzureChatOpenAI()
+    faiss_vectorstore = MyFaissVectorstore(url = faiss_server_url)
+    bge_embedding = BGEEmbedding(url = embedding_server_url)
     generate_prompt = GeneratePrompt()
     content_filter = KeyWordFilter()
     rewriter = BaseRewriter(chat)
-    reranker = BGEReranker()
+    reranker = BGEReranker(url = rerank_server_url)
     rag_chain_with_rewrite_rerank = RAGChainWithRewriteRerank(faiss_vectorstore, bge_embedding, chat, content_filter,
                                                               generate_prompt, rewriter, reranker)
 
